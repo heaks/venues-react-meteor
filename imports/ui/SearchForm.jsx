@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Queries } from '../api/queries';
 
-export default class SearchForm extends Component {
+const SearchForm = React.createClass({
     handleSubmit(e) {
         e.preventDefault();
         const text = this.refs.searchRequest.value;
@@ -13,7 +13,7 @@ export default class SearchForm extends Component {
         });
 
         this.refs.searchForm.reset();
-    }
+    },
 
     render() {
         return (
@@ -26,4 +26,6 @@ export default class SearchForm extends Component {
             </form>
         )
     }
-}
+});
+
+export default SearchForm
