@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import QueriesList from './QueriesList';
-import GoogleMap from './GoogleMap';
+import GoogleMapInstance from './GoogleMap';
 import Results from './Results';
 import SearchForm from './SearchForm';
 
@@ -14,7 +14,7 @@ export default class App extends Component {
                     <h1>Venues Search</h1>
                     <SearchForm />
                     <QueriesList />
-                    <GoogleMap />
+                    <GoogleMapInstance />
                     <Results/>
                 </header>
 
