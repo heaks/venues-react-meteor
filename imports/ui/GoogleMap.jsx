@@ -4,18 +4,14 @@ import GoogleMap from 'google-map-react'
 export default GoogleMapInstance = React.createClass({
     getInitialState: function () {
         return {
-            center: {lat: 49.834388, lng: 24.025106},
-            zoom: 11,
-            searchRadius: 3000,
             apiKey: 'AIzaSyDTuCROZWUGNj7BcNQbWNzcIhbG4mqW0D8'
         }
     },
     onChange: function (center, zoom, bounds, marginBounds) {
-        console.log('onChange', center, zoom);
-        // this.setState({center: center, zoom: zoom});
-        console.log('context: ', this)
+        this.props.currentCoordinates(center, zoom)
     },
     render: function () {
+        console.log('props: ', this.props);
         return (
             <div style={{width: '700px', height:'400px'}}>
                 <h2>Google Map</h2>
@@ -24,8 +20,8 @@ export default GoogleMapInstance = React.createClass({
                     bootstrapURLKeys={{
                         key: this.state.apiKey
                     }}
-                    center= {this.state.center}
-                    zoom= {this.state.zoom}
+                    center= {this.props.data.center}
+                    zoom= {this.props.data.zoom}
                 />
             </div>
         )
