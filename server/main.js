@@ -1,1 +1,1 @@
-import '../imports/api/queries';
+import '/imports/startup/server/index'

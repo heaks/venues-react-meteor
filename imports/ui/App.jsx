@@ -10,23 +10,32 @@ export default App = React.createClass({
         return {
             center: {lat: 49.834388, lng: 24.025106},
             zoom: 11,
-            searchRadius: 3000
+            searchRadius: 3000,
+            searchResults: []
         }
     },
-    currentCoordinates(center, zoom=11) {
-        console.log('current coordinates ', center, zoom);
-        // this.setState({center: center, zoom: zoom});
-        console.log('new state: ', this.state);
+    currentCoordinates(data) {
+        let updatedRadius = Math.pow(2, (8 - data.zoom)) * 276890;
+        this.setState({center: {lat: data.center.lat, lng:data.center.lng}, zoom: data.zoom, searchRadius: updatedRadius});
+    },
+    updateResults(result) {
+        this.setState({searchResults: result.data.response.venues.map((venue)=>{
+            return {
+                id: venue.id,
+                name: venue.name,
+                location: venue.location
+            }
+        })});
     },
     render() {
         return (
             <div className="container">
                 <header>
                     <h1>Venues Search</h1>
-                    <SearchForm />
+                    <SearchForm data={this.state} updateResults={this.updateResults}/>
                     <QueriesList />
                     <GoogleMapInstance currentCoordinates={this.currentCoordinates} data={this.state}/>
-                    <Results/>
+                    <Results allVenues={this.state.searchResults}/>
                 </header>
 
             </div>

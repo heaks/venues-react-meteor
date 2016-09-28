@@ -7,10 +7,12 @@ import Query from './Query';
 
 
 export default class QueriesList extends Component {
-
+    removeQuery(id) {
+        Queries.remove({_id: id});
+    }
     renderQueries() {
         return this.props.queries.map((query) => (
-            <Query key={query._id} query={query} />
+            <Query key={query._id} query={query} removeQuery={this.removeQuery}/>
         ));
     }
     render() {
@@ -23,6 +25,7 @@ export default class QueriesList extends Component {
                         <th>Request</th>
                         <th>Search point</th>
                         <th>Radius</th>
+                        <th>Search time</th>
                     </tr>
                     </thead>
                     <tbody>
