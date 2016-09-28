@@ -9,13 +9,12 @@ export default class Results extends Component {
         const venues = this.props.allVenues.map((venue)=>{
             return {
                 name: venue.name,
-                address: venue.location.address,
-                city: venue.location.city,
-                country: venue.location.cc
+                address: venue.location.address || 'unknown',
+                city: venue.location.city || 'unknown',
+                country: venue.location.cc || 'unknown'
             }
         });
-        //TODO: venues array doesn't work for some reason, allVenues does work
-        exportCSV.call({data: this.props.allVenues}, (err, res) => {
+        exportCSV.call({data: venues}, (err, res) => {
             if(err) console.log(err);
             if(res) {
                 let blob = new Blob([res], {type: "text/plain;charset=utf-8"});
