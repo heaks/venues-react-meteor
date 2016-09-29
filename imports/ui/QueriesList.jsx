@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -7,12 +8,9 @@ import Query from './Query';
 
 
 export default class QueriesList extends Component {
-    removeQuery(id) {
-        Queries.remove({_id: id});
-    }
     renderQueries() {
         return this.props.queries.map((query) => (
-            <Query key={query._id} query={query} removeQuery={this.removeQuery}/>
+            <Query key={query._id} query={query}/>
         ));
     }
     render() {
@@ -42,6 +40,7 @@ QueriesList.propTypes = {
 };
 
 export default createContainer(() => {
+    Meteor.subscribe('queries');
     return {
         queries: Queries.find({}).fetch(),
     };

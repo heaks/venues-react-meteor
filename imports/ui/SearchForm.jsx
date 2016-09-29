@@ -1,5 +1,5 @@
 import React from 'react';
-import { Queries } from '../api/queries';
+import { insertQuery } from '/imports/api/methods';
 
 const SearchForm = React.createClass({
     handleSubmit(e) {
@@ -7,11 +7,10 @@ const SearchForm = React.createClass({
         const text = this.refs.searchRequest.value;
         const data = this.props.data;
 
-        Queries.insert({
+        insertQuery.call({
             request: text,
-            searchPoint: {lat: data.center.lat.toFixed(6), long: data.center.lng.toFixed(6)},
-            radius: (data.searchRadius / 1000).toFixed(2),
-            time: (new Date()).toUTCString()
+            searchPoint: {lat: data.center.lat.toFixed(6), lng: data.center.lng.toFixed(6)},
+            radius: (data.searchRadius / 1000).toFixed(2)
         });
 
         let url = "https://api.foursquare.com/v2/venues/search?ll=" + data.center.lat + ', ' + data.center.lng +
