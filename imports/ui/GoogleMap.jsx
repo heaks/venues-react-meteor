@@ -18,7 +18,7 @@ export default GoogleMapInstance = React.createClass({
             )
         });
         return (
-            <div style={{width: '700px', height:'400px'}}>
+            <div style={{minWidth: '700px', width:'80%', height:'400px'}}>
                 <h2>Google Map</h2>
                 <GoogleMap
                     onChange= {this.onChange}

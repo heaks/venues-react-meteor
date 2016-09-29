@@ -42,6 +42,6 @@ QueriesList.propTypes = {
 export default createContainer(() => {
     Meteor.subscribe('queries');
     return {
-        queries: Queries.find({}).fetch(),
+        queries: Queries.find({owner: Meteor.userId()}).fetch(),
     };
 }, QueriesList);

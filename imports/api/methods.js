@@ -2,6 +2,7 @@ import 'meteor/lfergon:exportcsv';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Queries } from '/imports/api/queries';
+import { Meteor } from 'meteor/meteor';
 
 export const exportCSV = new ValidatedMethod({
     name: 'export.csv',
@@ -26,6 +27,7 @@ export const insertQuery = new ValidatedMethod({
     }).validator(),
     run(document) {
         document.time = (new Date()).toUTCString();
+        document.owner = Meteor.userId();
         Queries.insert(document);
     }
 });

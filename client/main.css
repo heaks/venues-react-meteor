@@ -38,3 +38,9 @@ h1 {
     font-size: 1em;
     padding: 4px;
 }
+
+.header {
+    height: 80px;
+    width: 100%;
+    background-color: aliceblue;
+}
