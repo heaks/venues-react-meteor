@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import QueriesList from './QueriesList';
 import GoogleMapInstance from './GoogleMap';
@@ -29,17 +30,33 @@ export default App = React.createClass({
         })});
     },
     render() {
-        return (
-            <div className="container">
-                <header>
-                    <h1>Venues Search</h1>
-                    <SearchForm data={this.state} updateResults={this.updateResults}/>
-                    <QueriesList />
-                    <GoogleMapInstance currentCoordinates={this.currentCoordinates} data={this.state}/>
-                    <Results allVenues={this.state.searchResults}/>
-                </header>
+        if(this.props.userId){
+            return (
+                <div className="container">
+                    <header>
+                        <h1>Venues Search</h1>
+                        <SearchForm data={this.state} updateResults={this.updateResults}/>
+                        <QueriesList />
+                        <GoogleMapInstance currentCoordinates={this.currentCoordinates} data={this.state}/>
+                        <Results allVenues={this.state.searchResults}/>
+                    </header>
 
-            </div>
-        )
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    Please log in
+                </div>
+
+            )
+        }
+
     }
 });
+
+export default createContainer(() => {
+    return {
+        userId: Meteor.userId()
+    }
+}, App);
